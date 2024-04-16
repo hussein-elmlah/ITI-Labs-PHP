@@ -108,7 +108,7 @@ if (count($errors) === 0) {
     // echo "<br>New Users after adding new user: <br>";
     // print_r($users);
     file_put_contents($usersDataFile, json_encode($users, JSON_PRETTY_PRINT));
-    header("Location: response.php");
+    header("Location: users.php");
 } else {
     // Redirect back to registration form with error messages
     $errors = json_encode($errors);

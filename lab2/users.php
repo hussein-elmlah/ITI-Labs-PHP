@@ -11,7 +11,7 @@ if (isset($_GET['delete_user'])) {
     if ($userIndex !== false) {
         array_splice($users, $userIndex, 1);
         file_put_contents($usersDataFile, json_encode($users, JSON_PRETTY_PRINT));
-        header("Location: response.php");
+        header("Location: users.php");
         exit();
     }
 }
@@ -56,7 +56,7 @@ foreach ($users as $user) {
     echo '<td>' . $user['gender'] . '</td>';
     echo '<td>' . $user['department'] . '</td>';
     echo '<td>' . implode(', ', $user['skills']) . '</td>';
-    echo '<td><a href="response.php?delete_user=' . $user['id'] . '" class="btn btn-danger btn-sm">Delete</a></td>';
+    echo '<td><a href="users.php?delete_user=' . $user['id'] . '" class="btn btn-danger btn-sm">Delete</a></td>';
     echo '</tr>';
 }
 
