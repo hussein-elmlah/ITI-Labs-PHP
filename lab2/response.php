@@ -34,15 +34,15 @@ echo '<!DOCTYPE html>
 
 foreach ($users as $user) {
     echo '<tr>';
-    echo '<td>' . htmlspecialchars($user['id']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['username']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['firstName']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['lastName']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['address']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['country']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['gender']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['department']) . '</td>';
-    echo '<td>' . htmlspecialchars(implode(', ', $user['skills'])) . '</td>';
+    echo '<td>' . $user['id'] . '</td>';
+    echo '<td>' . $user['username'] . '</td>';
+    echo '<td>' . $user['firstName'] . '</td>';
+    echo '<td>' . $user['lastName'] . '</td>';
+    echo '<td>' . $user['address'] . '</td>';
+    echo '<td>' . $user['country'] . '</td>';
+    echo '<td>' . $user['gender'] . '</td>';
+    echo '<td>' . $user['department'] . '</td>';
+    echo '<td>' . implode(', ', $user['skills']) . '</td>';
     echo '</tr>';
 }
 
