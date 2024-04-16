@@ -14,21 +14,5 @@
         "username": "Hussein-Elmlah",
         "password": "$2y$10$JGXeuXjI9.V4aYu7n5i1wett8OnaI43nJGAoXKNLYijyeYGsHrj9.",
         "department": "OSAD"
-    },
-    {
-        "id": 8,
-        "firstName": "Hussein",
-        "lastName": "Elmlah",
-        "address": "Cairo",
-        "country": "Egypt",
-        "gender": "male",
-        "skills": [
-            "PHP",
-            "MySQL",
-            "PostgreSQL"
-        ],
-        "username": "Hussein-Elmlah0",
-        "password": "$2y$10$JGXeuXjI9.V4aYu7n5i1wett8OnaI43nJGAoXKNLYijyeYGsHrj9.",
-        "department": "OSAD"
     }
 ]
