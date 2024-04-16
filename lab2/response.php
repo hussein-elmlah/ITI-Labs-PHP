@@ -5,7 +5,19 @@ include 'base.php';
 $usersDataFile = 'database/users_users/users.json';
 $users = json_decode(file_get_contents($usersDataFile), true);
 
-echo '<!DOCTYPE html>
+if (isset($_GET['delete_user'])) {
+    $userIdToDelete = $_GET['delete_user'];
+    $userIndex = array_search($userIdToDelete, array_column($users, 'id'));
+    if ($userIndex !== false) {
+        array_splice($users, $userIndex, 1);
+        file_put_contents($usersDataFile, json_encode($users, JSON_PRETTY_PRINT));
+        header("Location: response.php");
+        exit();
+    }
+}
+
+echo '
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -28,6 +40,7 @@ echo '<!DOCTYPE html>
                     <th scope="col">Gender</th>
                     <th scope="col">Department</th>
                     <th scope="col">Skills</th>
+                    <th scope="col">Actions</th>
                 </tr>
             </thead>
             <tbody>';
@@ -43,6 +56,7 @@ foreach ($users as $user) {
     echo '<td>' . $user['gender'] . '</td>';
     echo '<td>' . $user['department'] . '</td>';
     echo '<td>' . implode(', ', $user['skills']) . '</td>';
+    echo '<td><a href="response.php?delete_user=' . $user['id'] . '" class="btn btn-danger btn-sm">Delete</a></td>';
     echo '</tr>';
 }
 
