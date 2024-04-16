@@ -27,7 +27,7 @@ echo '
 </head>
 <body>
     <div class="container">
-        <h1>User Data</h1>
+        <h1>Users Data</h1>
         <table class="table">
             <thead>
                 <tr>
