@@ -1,0 +1,16 @@
+[
+    {
+        "id": 19,
+        "firstName": "Hussein",
+        "lastName": "Elmlah",
+        "address": "Cairo",
+        "country": "Egypt",
+        "gender": "male",
+        "skills": [
+            "PHP"
+        ],
+        "username": "Hussein-Elmlah",
+        "password": "$2y$10$7.r3EiFXy6nkbGxVaI5Z0ef9RRiT8LcDNVOaYwmi.XJod1YzZsyym",
+        "department": "OSAD"
+    }
+]
