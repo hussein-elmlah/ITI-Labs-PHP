@@ -1,6 +1,16 @@
+<?php include 'navbar.php'; ?>
+
 <?php
 
 include 'base.php';
+
+session_start();
+
+if (!isset($_SESSION["user"])) {
+    header("Location: loginForm.php");
+}
+
+$user = $_SESSION["user"];
 
 $usersDataFile = 'database/users_users/users.json';
 $users = json_decode(file_get_contents($usersDataFile), true);
@@ -26,7 +36,7 @@ echo '
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container">
+    <div class="container fixed-top pt-5 z-0">
         <h1>Users Data</h1>
         <table class="table">
             <thead>

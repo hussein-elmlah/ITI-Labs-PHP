@@ -29,6 +29,9 @@ $old_data = [];
 if (empty($_POST["name"])) {
     $errors["name"] = "First name is required";
 } else {
+    if (!preg_match("/^[a-zA-Z ]*$/", $_POST["name"])) {
+        $errors["name"] = "Only letters and white space allowed";
+    }
     $old_data['name'] = $_POST["name"];
 }
 
@@ -56,7 +59,15 @@ if (empty($_POST["email"])) {
 if (empty($_POST["password"])) {
     $errors["password"] = "Password is required";
 } else {
-    $old_data['password'] = $_POST["password"];
+    $password = $_POST["password"];
+    // if (strlen($password) < 8) {
+    //     $errors["password"] = "Password must be at least 8 characters long";
+    // } elseif (preg_match('/[^a-z0-9_]/', $password)) {
+    //     $errors["password"] = "Password must contain only letters, numbers, and underscores";
+    // } elseif (preg_match('/[A-Z]/', $password)) {
+    //     $errors["password"] = "Password must not contain capital letters";
+    // }
+    $old_data['password'] = $password;
 }
 
 if (empty($_POST["rePassword"])) {
@@ -80,12 +91,6 @@ if (empty($_POST["department"])) {
     $old_data['department'] = $_POST["department"];
 }
 
-// var_dump($_FILES);
-// var_dump("!isset: ");
-// var_dump(!isset($_FILES['image']['tmp_name']));
-// var_dump("empty : ");
-// var_dump(empty($_FILES['image']['tmp_name']));
-
 if (empty($_FILES['image']['tmp_name'])) {
     $errors["image"] = "image is required";
 } else {
@@ -93,10 +98,8 @@ if (empty($_FILES['image']['tmp_name'])) {
     $filename = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
-    var_dump($extension);
     
-    if($extension != "jpg" && $extension != "png" && $extension != "jpeg"
-    && $extension != "gif" ) {
+    if($extension != "jpg" && $extension != "png" && $extension != "jpeg" && $extension != "gif" ) {
         $errors["image"] = "Sorry, only JPG, JPEG, PNG and GIF files are allowed.";
     }
 
