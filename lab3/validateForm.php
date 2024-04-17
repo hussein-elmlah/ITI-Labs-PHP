@@ -98,7 +98,6 @@ if (empty($_FILES['image']['tmp_name'])) {
     if($extension != "jpg" && $extension != "png" && $extension != "jpeg"
     && $extension != "gif" ) {
         $errors["image"] = "Sorry, only JPG, JPEG, PNG and GIF files are allowed.";
-        // $errors["image"] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";  // issue with '&' even i use htmlspecialchars !?????
     }
 
     $imagesDirectory = 'images/';
