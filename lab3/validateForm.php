@@ -26,16 +26,10 @@ if (empty($users)) {
 $errors = [];
 $old_data = [];
 
-if (empty($_POST["firstName"])) {
-    $errors["firstName"] = "First name is required";
+if (empty($_POST["name"])) {
+    $errors["name"] = "First name is required";
 } else {
-    $old_data['firstName'] = $_POST["firstName"];
-}
-
-if (empty($_POST["lastName"])) {
-    $errors["lastName"] = "Last name is required";
-} else {
-    $old_data['lastName'] = $_POST["lastName"];
+    $old_data['name'] = $_POST["name"];
 }
 
 if (empty($_POST["email"])) {
@@ -65,22 +59,19 @@ if (empty($_POST["password"])) {
     $old_data['password'] = $_POST["password"];
 }
 
-if (empty($_POST["address"])) {
-    $errors["address"] = "Address is required";
+if (empty($_POST["rePassword"])) {
+    $errors["rePassword"] = "rePassword is required";
 } else {
-    $old_data['address'] = $_POST["address"];
+    $old_data['rePassword'] = $_POST["rePassword"];
+    if ($_POST["password"]!== $_POST["rePassword"]) {
+        $errors["rePassword"] = "Passwords do not match";
+    }
 }
 
-if (empty($_POST["country"])) {
-    $errors["country"] = "Country is required";
+if (empty($_POST["room"])) {
+    $errors["room"] = "room is required";
 } else {
-    $old_data['country'] = $_POST["country"];
-}
-
-if (empty($_POST["gender"])) {
-    $errors["gender"] = "Gender is required";
-} else {
-    $old_data['gender'] = $_POST["gender"];
+    $old_data['room'] = $_POST["room"];
 }
 
 if (empty($_POST["department"])) {
@@ -89,10 +80,36 @@ if (empty($_POST["department"])) {
     $old_data['department'] = $_POST["department"];
 }
 
-if (!isset($_POST["skills"]) || empty($_POST["skills"])) {
-    $errors["skills"] = "Skills are required";
+// var_dump($_FILES);
+// var_dump("!isset: ");
+// var_dump(!isset($_FILES['image']['tmp_name']));
+// var_dump("empty : ");
+// var_dump(empty($_FILES['image']['tmp_name']));
+
+if (empty($_FILES['image']['tmp_name'])) {
+    $errors["image"] = "image is required";
 } else {
-    $old_data['skills'] = $_POST["skills"];
+
+    $filename = $_FILES['image']['name'];
+    $tmp_name = $_FILES['image']['tmp_name'];
+    $extension = pathinfo($filename, PATHINFO_EXTENSION);
+    var_dump($extension);
+    
+    if($extension != "jpg" && $extension != "png" && $extension != "jpeg"
+    && $extension != "gif" ) {
+        $errors["image"] = "Sorry, only JPG, JPEG, PNG and GIF files are allowed.";
+        // $errors["image"] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";  // issue with '&' even i use htmlspecialchars !?????
+    }
+
+    $imagesDirectory = 'images/';
+    if (!file_exists($imagesDirectory)) {
+        mkdir($imagesDirectory, 0777, true); // Recursive directory creation
+    }
+    $newFilename = "{$filename}".floor(microtime(true) * 1000);
+    $imagePath = "images/{$newFilename}";
+    $saved = move_uploaded_file($tmp_name, $imagePath);    
+    echo "<img  width='300' height='300' src='{$imagePath}'> ";
+
 }
 
 if (count($errors) === 0) {
@@ -101,15 +118,12 @@ if (count($errors) === 0) {
     $hashedPassword = password_hash($_POST['password'], PASSWORD_DEFAULT);
     $newUser = [
         'id' => $userID + 1,
-        'firstName' => $_POST['firstName'],
-        'lastName' => $_POST['lastName'],
-        'address' => $_POST['address'],
-        'country' => $_POST['country'],
-        'gender' => $_POST['gender'],
-        'skills' => $_POST['skills'],
+        'name' => $_POST['name'],
         'email' => $_POST['email'],
         'password' => $hashedPassword,
-        'department' => $_POST['department']
+        'room' => $_POST['room'],
+        'department' => $_POST['department'],
+        'image' => $imagePath,
     ];
     array_push($users, $newUser);
     file_put_contents($usersDataFile, json_encode($users, JSON_PRETTY_PRINT));

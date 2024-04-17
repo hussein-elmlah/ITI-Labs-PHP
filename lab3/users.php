@@ -32,14 +32,11 @@ echo '
             <thead>
                 <tr>
                     <th scope="col">ID</th>
+                    <th scope="col">Name</th>
                     <th scope="col">Email</th>
-                    <th scope="col">First Name</th>
-                    <th scope="col">Last Name</th>
-                    <th scope="col">Address</th>
-                    <th scope="col">Country</th>
-                    <th scope="col">Gender</th>
+                    <th scope="col">Room</th>
                     <th scope="col">Department</th>
-                    <th scope="col">Skills</th>
+                    <th scope="col">Image</th>
                     <th scope="col">Actions</th>
                 </tr>
             </thead>
@@ -48,14 +45,11 @@ echo '
 foreach ($users as $user) {
     echo '<tr>';
     echo '<td>' . htmlspecialchars($user['id']) . '</td>';
+    echo '<td>' . htmlspecialchars($user['name']) . '</td>';
     echo '<td>' . htmlspecialchars($user['email']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['firstName']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['lastName']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['address']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['country']) . '</td>';
-    echo '<td>' . htmlspecialchars($user['gender']) . '</td>';
+    echo '<td>' . htmlspecialchars($user['room']) . '</td>';
     echo '<td>' . htmlspecialchars($user['department']) . '</td>';
-    echo '<td>' . htmlspecialchars(implode(', ', $user['skills'])) . '</td>';
+    echo '<td> <img width="100" height="100" src="' . htmlspecialchars($user['image']) . '" </td>';
     echo '<td><a href="users.php?delete_user=' . htmlspecialchars($user['id']) . '" class="btn btn-danger btn-sm">Delete</a></td>';
     echo '</tr>';
 }

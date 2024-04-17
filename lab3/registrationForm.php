@@ -19,19 +19,12 @@
 <body>
     <div class="container">
         <h1>Registration Form</h1>
-        <form action="validateForm.php" method="post">
+        <form action="validateForm.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
-                <label for="firstName" class="form-label">First Name:</label>
-                <input type="text" class="form-control" id="firstName" name="firstName" value="<?php echo isset($old_data['firstName']) ? $old_data['firstName'] : ''; ?>" required>
+                <label for="name" class="form-label">Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="<?php echo isset($old_data['name']) ? $old_data['name'] : ''; ?>" required>
                 <label style="color: red; font-weight: bold">
-                    <?php echo isset($errors['firstName']) ? $errors['firstName'] : ''; ?>
-                </label>
-            </div>
-            <div class="mb-3">
-                <label for="lastName" class="form-label">Last Name:</label>
-                <input type="text" class="form-control" id="lastName" name="lastName" value="<?php echo isset($old_data['lastName']) ? $old_data['lastName'] : ''; ?>" required>
-                <label style="color: red; font-weight: bold">
-                    <?php echo isset($errors['lastName']) ? $errors['lastName'] : ''; ?>
+                    <?php echo isset($errors['name']) ? $errors['name'] : ''; ?>
                 </label>
             </div>
             <div class="mb-3">
@@ -49,36 +42,22 @@
                 </label>
             </div>
             <div class="mb-3">
-                <label for="address" class="form-label">Address:</label>
-                <textarea class="form-control" id="address" name="address" required><?php echo isset($old_data['address']) ? $old_data['address'] : ''; ?></textarea>
+                <label for="rePassword" class="form-label">rePassword:</label>
+                <input type="password" class="form-control" id="rePassword" name="rePassword" required>
                 <label style="color: red; font-weight: bold">
-                    <?php echo isset($errors['address']) ? $errors['address'] : ''; ?>
+                    <?php echo isset($errors['rePassword']) ? $errors['rePassword'] : ''; ?>
                 </label>
             </div>
             <div class="mb-3">
-                <label for="country" class="form-label">Select Country:</label>
-                <select class="form-select" id="country" name="country" required>
-                    <option value="">Select Country</option>
-                    <option value="Egypt" <?php echo isset($old_data['country']) && $old_data['country'] === 'Egypt' ? 'selected' : ''; ?>>Egypt</option>
-                    <option value="USA" <?php echo isset($old_data['country']) && $old_data['country'] === 'USA' ? 'selected' : ''; ?>>USA</option>
-                    <option value="UK" <?php echo isset($old_data['country']) && $old_data['country'] === 'UK' ? 'selected' : ''; ?>>UK</option>
+                <label for="room" class="form-label">Select Room:</label>
+                <select class="form-select" id="room" name="room" required>
+                    <option value="">Select room</option>
+                    <option value="Application1" <?php echo isset($old_data['room']) && $old_data['room'] === 'Application1' ? 'selected' : ''; ?>>Application1</option>
+                    <option value="Application2" <?php echo isset($old_data['room']) && $old_data['room'] === 'Application2' ? 'selected' : ''; ?>>Application2</option>
+                    <option value="Cloud" <?php echo isset($old_data['room']) && $old_data['room'] === 'Cloud' ? 'selected' : ''; ?>>Cloud</option>
                 </select>
                 <label style="color: red; font-weight: bold">
-                    <?php echo isset($errors['country']) ? $errors['country'] : ''; ?>
-                </label>
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Gender:</label><br>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="male" name="gender" value="male" <?php echo isset($old_data['gender']) && $old_data['gender'] === 'male' ? 'checked' : ''; ?> required>
-                    <label class="form-check-label" for="male">Male</label>
-                </div>
-                <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="radio" id="female" name="gender" value="female" <?php echo isset($old_data['gender']) && $old_data['gender'] === 'female' ? 'checked' : ''; ?> required>
-                    <label class="form-check-label" for="female">Female</label>
-                </div>
-                <label style="color: red; font-weight: bold">
-                    <?php echo isset($errors['gender']) ? $errors['gender'] : ''; ?>
+                    <?php echo isset($errors['room']) ? $errors['room'] : ''; ?>
                 </label>
             </div>
             <div class="mb-3">
@@ -89,25 +68,11 @@
                 </label>
             </div>
             <div class="mb-3">
-                <label class="form-label">Skills:</label><br>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="php" name="skills[]" value="PHP" <?php echo isset($old_data['skills']) && in_array('PHP', $old_data['skills']) ? 'checked' : ''; ?>>
-                    <label class="form-check-label" for="php">PHP</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="mysql" name="skills[]" value="MySQL" <?php echo isset($old_data['skills']) && in_array('MySQL', $old_data['skills']) ? 'checked' : ''; ?>>
-                    <label class="form-check-label" for="mysql">MySQL</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="java" name="skills[]" value="J2SE" <?php echo isset($old_data['skills']) && in_array('J2SE', $old_data['skills']) ? 'checked' : ''; ?>>
-                    <label class="form-check-label" for="java">J2SE</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="postgres" name="skills[]" value="PostgreSQL" <?php echo isset($old_data['skills']) && in_array('PostgreSQL', $old_data['skills']) ? 'checked' : ''; ?>>
-                    <label class="form-check-label" for="postgres">PostgreSQL</label>
-                </div>
+                <label for="" class="form-label">Profile picture</label>
+                <input type="file" name="image"
+                class="form-control"  aria-describedby="emailHelp">
                 <label style="color: red; font-weight: bold">
-                    <?php echo isset($errors['skills']) ? $errors['skills'] : ''; ?>
+                        <?php echo isset($errors['image']) ? htmlspecialchars($errors['image']) : ''; ?>
                 </label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
