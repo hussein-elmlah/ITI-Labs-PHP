@@ -91,27 +91,31 @@ if (empty($_POST["department"])) {
     $old_data['department'] = $_POST["department"];
 }
 
-if (empty($_FILES['image']['tmp_name'])) {
-    $errors["image"] = "image is required";
-} else {
-
+if (!empty($_FILES['image']['tmp_name'])) {
     $filename = $_FILES['image']['name'];
     $tmp_name = $_FILES['image']['tmp_name'];
     $extension = pathinfo($filename, PATHINFO_EXTENSION);
-    
-    if($extension != "jpg" && $extension != "png" && $extension != "jpeg" && $extension != "gif" ) {
+
+    if (!in_array($extension, ['jpg', 'jpeg', 'png', 'gif'])) {
         $errors["image"] = "Sorry, only JPG, JPEG, PNG and GIF files are allowed.";
-    }
+    } else {
+        $imagesDirectory = 'images/';
+        if (!file_exists($imagesDirectory)) {
+            mkdir($imagesDirectory, 0777, true); // Recursive directory creation
+        }
 
-    $imagesDirectory = 'images/';
-    if (!file_exists($imagesDirectory)) {
-        mkdir($imagesDirectory, 0777, true); // Recursive directory creation
-    }
-    $newFilename = "{$filename}".floor(microtime(true) * 1000);
-    $imagePath = "images/{$newFilename}";
-    $saved = move_uploaded_file($tmp_name, $imagePath);    
-    echo "<img  width='300' height='300' src='{$imagePath}'> ";
+        // Generate new filename with timestamp before extension
+        $timestamp = floor(microtime(true) * 1000);
+        $newFilename = pathinfo($filename, PATHINFO_FILENAME) . '-' . $timestamp . '.' . $extension;
+        $imagePath = "images/{$newFilename}";
 
+        $saved = move_uploaded_file($tmp_name, $imagePath);
+        if ($saved) {
+            echo "<img  width='300' height='300' src='{$imagePath}'> ";
+        } else {
+            $errors["image"] = "Failed to upload image.";
+        }
+    }
 }
 
 if (count($errors) === 0) {
