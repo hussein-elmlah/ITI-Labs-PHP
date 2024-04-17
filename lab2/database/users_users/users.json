@@ -1,16 +1,18 @@
 [
     {
-        "id": 2,
+        "id": 3,
         "firstName": "Hussein",
         "lastName": "Elmlah",
-        "address": "Giza",
+        "address": "Cairo",
         "country": "Egypt",
         "gender": "male",
         "skills": [
-            "PHP"
+            "PHP",
+            "MySQL",
+            "PostgreSQL"
         ],
-        "username": "Hussein-Elmlah",
-        "password": "$2y$10$pPTBvNTcZ2UX0O0YPodzQ.ISMeeDjwv4ey4uYqOr7iESP0mc1.BFi",
+        "username": "Hussein-Elmlah2",
+        "password": "$2y$10$qXL4Xef5\/92QXGy4hyp8Ge5rbK5OlCKfMEX\/SsOnF9\/W39eg2wMcW",
         "department": "OSAD"
     }
 ]
