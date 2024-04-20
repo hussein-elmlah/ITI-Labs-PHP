@@ -25,7 +25,7 @@
 <body>
     <?php include 'navbar.php'; ?> 
     <div class="container">
-        <h1>Login</h1>
+        <!-- <h1>Login</h1> -->
         <form action="login.php" method="post">
             <div class="mb-3">
                 <label for="email" class="form-label">email:</label>

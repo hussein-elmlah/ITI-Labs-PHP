@@ -33,21 +33,13 @@ function checkEmailExists($email, $userId = null)
     if ($userId !== null) {
         $sql .= " AND id != ?";
         $params[] = $userId;
-        echo "<script>alert('userId with ID: |$userId|');</script>";
-    } else {
-        echo "<script>alert('userId without ID: |$userId|');</script>";
-
+        // echo "<script>alert('userId with ID: |$userId|');</script>";
     }
 
     $stmt = $pdo->prepare($sql);
     $stmt->execute($params);
 
-    $affectedRows = $stmt->fetchColumn();
-
-    $isEmailExist = $affectedRows > 0;
-    echo "<script>alert('isEmailExist : |$isEmailExist|');</script>";
-
-    return $isEmailExist;
+    return $stmt->fetchColumn();
 }
 
 function addUser($name, $email, $password, $room, $department, $imagePath)

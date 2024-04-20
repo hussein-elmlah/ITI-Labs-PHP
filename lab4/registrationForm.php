@@ -28,7 +28,7 @@
 <body>
     <?php include 'navbar.php'; ?> 
     <div class="container">
-        <h1>Registration Form</h1>
+        <!-- <h1>Registration Form</h1> -->
         <form action="register.php" method="post" enctype="multipart/form-data">
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>

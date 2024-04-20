@@ -15,15 +15,14 @@ if (!isset($_SESSION["user"])) {
 $errors = [];
 $old_data = [];
 
+$userId = (int)$_GET['id'];
+$user = getUserById($userId);
+
 if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
-    $userId = $_GET['id'];
-    $user = getUserById($userId);
     if (!$user) {
         header("Location: users.php");
     }
 } elseif ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $userId = (int)$_GET['id'];
-    // var_dump($userId);
     $validationResult = validateUser($_POST, $_FILES, $userId);
     $errors = $validationResult['errors'];
     $old_data = $validationResult['old_data'];
@@ -31,6 +30,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     // var_dump("Current file path:", __FILE__);
     // var_dump("Errors:", $errors);
     // var_dump("Old Data:", $old_data);
+    // echo "<br><br>";
+    // var_dump("user:", $user);
 
     if (count($errors) === 0) {
         $updated = updateUserById($userId, $_POST['name'], $_POST['email'], $_POST['password'], $_POST['room'], $_POST['department'], $old_data['image']);
@@ -51,8 +52,8 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <div class="container pt-5">
-        <h1 class="pt-3">Edit User</h1>
+    <div class="container">
+        <h1 class="">Edit User</h1>
         <form action="updateUserForm.php?id=<?= $userId ?>" method="post" enctype="multipart/form-data">
         <input type="hidden" name="id" value="<?= $user['id'] ?>">
             <div class="mb-3">
@@ -97,8 +98,10 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
                         <img id="imagePreview" class="rounded" width='150' height='150' src="<?= isset($old_data['image']) ? $old_data['image'] : $user['image'] ?>">
                     </label>
                 </div>
-                <input type="file" id="imageUpload" class="form-control d-none" id="image" name="image" onchange="previewImage(this)">
+                <input type="file" id="imageUpload" class="form-control d-none" id="image" name="image" value="<?= isset($old_data['image']) ? $old_data['image'] : $user['image'] ?>" onchange="previewImage(this)">
+                <input type="hidden" name="lastImage" id="lastImage" value="<?= isset($old_data['image']) ? $old_data['image'] : $user['image'] ?>">
                 <label style="color: red; font-weight: bold"><?= isset($errors['image']) ? $errors['image'] : ''; ?></label>
+                <h2><?= isset($old_data['image']) ? $old_data['image'] : $user['image'] ?></h2>
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
@@ -106,22 +109,27 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
     </div>
 
     <script>
-        function previewImage(input) {
-            const preview = document.getElementById('imagePreview');
-            const file = input.files[0];
-            const reader = new FileReader();
+    function previewImage(input) {
+        const preview = document.getElementById('imagePreview');
+        const imageUpload = document.getElementById('imageUpload');
+        const lastImage = document.getElementById('lastImage');
+        const file = input.files[0];
+        const reader = new FileReader();
 
-            reader.onloadend = function () {
-                preview.src = reader.result;
-            };
+        reader.onloadend = function () {
+            preview.src = reader.result;
+            lastImage.value = imageUpload.value;
+            // alert('lastImageValue: ' + lastImage.value);
+        };
 
-            if (file) {
-                reader.readAsDataURL(file);
-            } else {
-                preview.src = '';
-            }
+        if (file) {
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = '';
         }
-    </script>
+    }
+</script>
+
 
 </body>
 </html>

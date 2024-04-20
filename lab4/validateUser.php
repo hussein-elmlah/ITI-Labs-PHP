@@ -97,7 +97,9 @@ function validateUser($data, $files, $userId=null)
             }
         }
     } else {
-        $old_data['image'] = "";
+        // $lastImage = $data['lastImage'];
+        // echo "<script>alert('lastImage: |$lastImage|');</script>";
+        $old_data['image'] = $data['lastImage'];
     }
 
     return ['errors' => $errors, 'old_data' => $old_data];
