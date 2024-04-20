@@ -4,7 +4,7 @@
 
 include 'base.php';
 
-session_start();
+// session_start();
 
 if (!isset($_SESSION["user"])) {
     header("Location: loginForm.php");
@@ -59,7 +59,11 @@ foreach ($users as $user) {
     echo '<td>' . htmlspecialchars($user['email']) . '</td>';
     echo '<td>' . htmlspecialchars($user['room']) . '</td>';
     echo '<td>' . htmlspecialchars($user['department']) . '</td>';
-    echo '<td> <img width="100" height="100" src="' . htmlspecialchars($user['image']) . '" </td>';
+    if ($user['image'] !== null) {
+        echo '<td> <img width="100" height="100" src="' . htmlspecialchars($user['image']) . '" </td>';
+    } else {
+        echo '<td>No image available</td>';
+    }
     echo '<td><a href="users.php?delete_user=' . htmlspecialchars($user['id']) . '" class="btn btn-danger btn-sm">Delete</a></td>';
     echo '</tr>';
 }

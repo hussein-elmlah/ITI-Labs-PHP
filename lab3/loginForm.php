@@ -6,6 +6,12 @@
     if(isset($_GET['old_data'])){
         $old_data = json_decode($_GET["old_data"], true);
     }
+
+    session_start();
+
+    if (isset($_SESSION["user"])) {
+        header("Location: welcome.php");
+    }
 ?>
 
 <!DOCTYPE html>
@@ -27,7 +33,7 @@
             </div>
             <div class="mb-3">
                 <label for="password" class="form-label">Password:</label>
-                <input type="password" class="form-control" id="password" name="password" value="<?php echo isset($old_data['password']) ? $old_data['password'] : ''; ?>" required>
+                <input type="password" class="form-control" id="password" name="password" required>
                 <label style="color: red; font-weight: bold">
                     <?php echo isset($errors['login']) ? $errors['login'] : ''; ?>
                 </label>

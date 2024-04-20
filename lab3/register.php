@@ -60,7 +60,7 @@ if (empty($_POST["password"])) {
     $errors["password"] = "Password is required";
 } else {
     $password = $_POST["password"];
-    // if (strlen($password) < 8) {
+    // if (strlen($password) !== 8) {
     //     $errors["password"] = "Password must be at least 8 characters long";
     // } elseif (preg_match('/[^a-z0-9_]/', $password)) {
     //     $errors["password"] = "Password must contain only letters, numbers, and underscores";

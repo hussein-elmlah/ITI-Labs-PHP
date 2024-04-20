@@ -18,8 +18,8 @@ $user = $_SESSION["user"];
 </head>
 <body>
     <?php include 'navbar.php'; ?> 
-    <div class="container">
-        <h1>Welcome, <?php echo htmlspecialchars($user["name"]); ?>!</h1>
+    <div class="container pt-5">
+        <h1 class="pt-5">Welcome, <?php echo htmlspecialchars($user["name"]); ?>!</h1>
         <p>You have successfully logged in.</p>
     </div>
 </body>

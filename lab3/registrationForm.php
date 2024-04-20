@@ -6,6 +6,12 @@
     if(isset($_GET['old_data'])){
         $old_data = json_decode($_GET["old_data"], true);
     }
+
+    session_start();
+
+    if (isset($_SESSION["user"])) {
+        header("Location: welcome.php");
+    }
 ?>
 
 <!DOCTYPE html>
