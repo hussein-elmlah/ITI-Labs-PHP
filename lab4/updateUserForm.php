@@ -101,7 +101,7 @@ if ($_SERVER["REQUEST_METHOD"] == "GET" && isset($_GET['id'])) {
                 <input type="file" id="imageUpload" class="form-control d-none" id="image" name="image" value="<?= isset($old_data['image']) ? $old_data['image'] : $user['image'] ?>" onchange="previewImage(this)">
                 <input type="hidden" name="lastImage" id="lastImage" value="<?= isset($old_data['image']) ? $old_data['image'] : $user['image'] ?>">
                 <label style="color: red; font-weight: bold"><?= isset($errors['image']) ? $errors['image'] : ''; ?></label>
-                <h2><?= isset($old_data['image']) ? $old_data['image'] : $user['image'] ?></h2>
+                <!-- <h2><?= isset($old_data['image']) ? $old_data['image'] : $user['image'] ?></h2> -->
             </div>
 
             <button type="submit" class="btn btn-primary">Update</button>
