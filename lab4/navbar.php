@@ -7,7 +7,7 @@ if (isset($_SESSION["user"])) {
   $loggedIn = true;
 }
 
-echo "<br><br><br>";
+echo "<br><br>";
 
 ?>
 

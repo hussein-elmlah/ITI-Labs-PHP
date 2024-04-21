@@ -24,8 +24,6 @@ foreach ($users as $user) {
         $authenticatedUser = $user;
         unset($authenticatedUser['password']);
 
-        echo "<script>alert('authenticatedUser: |$$authenticatedUser|');</script>";
-
         break;
     }
 }
