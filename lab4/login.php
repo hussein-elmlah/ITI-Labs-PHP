@@ -17,7 +17,15 @@ $users = getUsers();
 
 foreach ($users as $user) {
     if ($user['email'] === $email && password_verify($password, $user['password'])) {
+        echo "<script>alert('user: |$$user|');</script>";
+        // Extracting password from the user array
+        $password = $user['password'];
+        // Creating a new array without the password field
         $authenticatedUser = $user;
+        unset($authenticatedUser['password']);
+
+        echo "<script>alert('authenticatedUser: |$$authenticatedUser|');</script>";
+
         break;
     }
 }
